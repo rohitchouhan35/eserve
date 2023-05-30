@@ -7,6 +7,20 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class CityTemperature {
+
+    public static String getData() throws IOException, InterruptedException {
+        String result = "";
+
+        int tempAhmedabad = getTemperature("Ahmedabad");
+        int tempMumbai = getTemperature("Mumbai");
+        int tempPune = getTemperature("Pune");
+
+        result += "Ahmedabad " + String.valueOf(tempAhmedabad) + " , " +
+                "Mumbai " + String.valueOf(tempMumbai) + " , " +
+                "Pune " + String.valueOf(tempPune);
+
+        return result;
+    }
     public static int getTemperature(String city) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city="+city))

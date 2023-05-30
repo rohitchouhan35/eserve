@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @EnableScheduling
@@ -18,21 +20,24 @@ public class SpringEmailDemoApplication {
 	@Autowired
 	private EmailSenderService senderService;
 
-	private static int temp;
+	public static List<String> emailList = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		temp = CityTemperature.getTemperature("Seattle");
 		SpringApplication.run(SpringEmailDemoApplication.class, args);
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	public void triggerMail() throws MessagingException {
-		sendTemperatureEmail();
+	public void triggerMail() throws MessagingException, IOException, InterruptedException {
+		GetUsersEmailList.addUsersToList(emailList);
+		sendTemperatureEmails();
 	}
 
-	@Scheduled(fixedRate = 10000) // Execute every 10 seconds (in milliseconds)
-	public void sendTemperatureEmail() throws MessagingException {
-		String data = "Your city's temperature is " + String.valueOf(temp);
-		senderService.sendSimpleEmail("rochauhan35@gmail.com", data, "Weather info");
+	@Scheduled(fixedRate = 10000)
+	public void sendTemperatureEmails() throws MessagingException, IOException, InterruptedException {
+		String data = CityTemperature.getData();
+
+		for (String email : emailList) {
+			senderService.sendSimpleEmail(email, data, "Weather info");
+		}
 	}
 }
