@@ -9,13 +9,13 @@ import java.util.List;
 
 public class GetUsersEmailList {
     public static void addUsersToList(List<String> emailList) {
-        String url = "jdbc:mysql://localhost:3306/email_list";
-        String username = "root";
-        String password = "";
+        String url = "url";
+        String username = "user";
+        String password = "password";
 
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT email FROM all_emails")) {
+             ResultSet resultSet = statement.executeQuery("SELECT email FROM email_list")) {
 
             while (resultSet.next()) {
                 String email = resultSet.getString("email");

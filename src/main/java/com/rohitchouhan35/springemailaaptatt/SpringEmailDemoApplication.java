@@ -23,6 +23,8 @@ public class SpringEmailDemoApplication {
 	public static List<String> emailList = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException, InterruptedException {
+		String version = System.getProperty("java.version");
+		System.out.println("Java version: " + version);
 		SpringApplication.run(SpringEmailDemoApplication.class, args);
 	}
 
@@ -33,7 +35,7 @@ public class SpringEmailDemoApplication {
 		sendTemperatureEmails();
 	}
 
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedRate = 10000) // executes every 10 seconds
 	public void sendTemperatureEmails() throws MessagingException, IOException, InterruptedException {
 		String data = CityTemperature.getData();
 
