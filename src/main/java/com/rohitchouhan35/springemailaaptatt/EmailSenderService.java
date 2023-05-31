@@ -26,9 +26,8 @@ public class EmailSenderService {
         message.setText(weatherDataContent);
         message.setSubject(subject);
         mailSender.send(message);
-        System.out.println("Sent Successfully...");
-
-
+        String userName = toEmail.substring(0, toEmail.indexOf('@'));
+        System.out.println("Sent Successfully to " + userName);
     }
 
     }

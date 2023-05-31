@@ -28,6 +28,7 @@ public class SpringEmailDemoApplication {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void triggerMail() throws MessagingException, IOException, InterruptedException {
+		emailList = new ArrayList<>();
 		GetUsersEmailList.addUsersToList(emailList);
 		sendTemperatureEmails();
 	}
