@@ -1,0 +1,16 @@
+image: springbootemailsql:latest
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - docker build -t springbootemailsql:latest .
+
+deploy:
+  stage: deploy
+  script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - docker push myapp:latest

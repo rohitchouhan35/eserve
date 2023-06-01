@@ -34,7 +34,7 @@ public class CityTemperature {
 //		System.out.println(responseBody);
 
         int temp = extractTemperature(responseBody);
-        System.out.println("Temperature: " + temp);
+        System.out.println("Temperature of " + city + " is " + temp);
         return temp;
     }
 
