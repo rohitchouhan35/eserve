@@ -35,7 +35,7 @@ public class SpringEmailDemoApplication {
 		sendTemperatureEmails();
 	}
 
-	@Scheduled(fixedRate = 3600000) // executes every 1 hr interval
+	@Scheduled(fixedRate = 10000) // executes every 5 seconds interval
 	public void sendTemperatureEmails() throws MessagingException, IOException, InterruptedException {
 		String data = CityTemperature.getData();
 
